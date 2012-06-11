@@ -19,17 +19,20 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.List;
 import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileFilter;
+import utils.FileUtils;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.pdf.PDFParser;
 import org.apache.tika.sax.BodyContentHandler;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
+import utils.GenerarColeccionArchivos;
 
 /**
  * The application's main frame.
@@ -319,21 +322,19 @@ public class SearchDocsView extends FrameView {
         // TODO add your handling code here:
         if (fileBox== null) {
             fileBox=new JFileChooser();
-            
-            /**fileBox = new JFileChooser();
-            fileBox.setFileFilter(new FileFilter() {
-
-                @Override
-                public boolean accept(File file) {
-                    if(file.isFile()){}
-                }
-
-                @Override
-                public String getDescription() {
-                    throw new UnsupportedOperationException("Not supported yet.");
-                }
-            })**/
+            fileBox.setDialogTitle("Seleccionar la carpeta a adjuntar");
+            fileBox.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            fileBox.setApproveButtonText("Seleccionar Directorio");
             fileBox.showOpenDialog(MainPanel);
+            //FileUtils.selectFiles(fileBox.getSelectedFile());
+            GenerarColeccionArchivos coleccion=new GenerarColeccionArchivos(fileBox.getSelectedFile());
+            coleccion.generarColeccion();
+            List documentos=coleccion.getColeccion();
+            for (int i = 0; i < documentos.size(); i++) {
+                File file = (File) documentos.get(i);
+                System.out.println(file.getAbsolutePath());
+                
+            }
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
