@@ -33,6 +33,7 @@ import org.apache.tika.sax.BodyContentHandler;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import utils.GenerarColeccionArchivos;
+import org.apache.lucene.document.Document;
 
 /**
  * The application's main frame.
@@ -329,11 +330,13 @@ public class SearchDocsView extends FrameView {
             //FileUtils.selectFiles(fileBox.getSelectedFile());
             GenerarColeccionArchivos coleccion=new GenerarColeccionArchivos(fileBox.getSelectedFile());
             coleccion.generarColeccion();
-            List documentos=coleccion.getColeccion();
+            coleccion.parseColeccionPdf();
+            List documentos=coleccion.getDocuments();
             for (int i = 0; i < documentos.size(); i++) {
-                File file = (File) documentos.get(i);
-                System.out.println(file.getAbsolutePath());
-                
+                Document doc = (Document) documentos.get(i);
+                System.out.println(i+"<============================================>");
+                System.out.println(doc.get("title"));
+                System.out.println("<============================================>");
             }
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
