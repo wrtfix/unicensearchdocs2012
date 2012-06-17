@@ -23,7 +23,11 @@ import org.xml.sax.SAXException;
 import searchdocs.SearchDocsView;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
-
+import org.apache.tika.parser.AbstractParser;
+import org.apache.tika.parser.Parser;
+import org.apache.tika.parser.html.HtmlParser;
+import org.apache.tika.parser.txt.TXTParser;
+import org.apache.tika.parser.microsoft.WordExtractor;
 /**
  *
  * @author k
@@ -158,6 +162,104 @@ public class GenerarColeccionArchivos {
         return docColeccion.size() + txtColeccion.size() + pdfColeccion.size() + htmlColeccion.size();
 
     }
+
+    public void parseColeccionGeneric(List listaDocumentos, AbstractParser parser){
+         InputStream input;
+
+        try {
+            for (int i = 0; i < listaDocumentos.size(); i++) {
+                File file = (File) listaDocumentos.get(i);
+                input = new FileInputStream(file);
+                BodyContentHandler textHandler = new BodyContentHandler();
+                Metadata metadata = new Metadata();
+                try {
+                    try {
+                        parser.parse(input, textHandler, metadata);
+                    } catch (TikaException ex) {
+                        Logger.getLogger(GenerarColeccionArchivos.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(GenerarColeccionArchivos.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SAXException ex) {
+                    Logger.getLogger(GenerarColeccionArchivos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    input.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(GenerarColeccionArchivos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                //System.out.println("Title: " + metadata.get("title"));
+
+                //System.out.println("Author: " + metadata.get("Author"));
+
+                //System.out.println("Fecha: " + metadata.get(Metadata.CREATION_DATE));
+
+                //System.out.println("Extension: " + metadata.get(Metadata.CONTENT_TYPE));
+
+                //System.out.println("Path: " + file.getAbsolutePath());
+                //System.out.println("<============================================>");
+                //System.out.println("Contenido" +textHandler.toString());
+                //System.out.println("<============================================>");
+                Document doc = new Document();
+
+                if (textHandler.toString() != null) {
+                    doc.add(new Field("contenido", textHandler.toString(), Field.Store.YES, Field.Index.ANALYZED));
+                } else {
+                    doc.add(new Field("contenido", "", Field.Store.YES, Field.Index.ANALYZED));
+                }
+
+                if (metadata.get(Metadata.CONTENT_TYPE) != null) {
+                    doc.add(new Field("extension", metadata.get(Metadata.CONTENT_TYPE), Field.Store.YES, Field.Index.NO));
+                } else {
+                    doc.add(new Field("extension", "", Field.Store.YES, Field.Index.NO));
+                }
+                if (metadata.get(Metadata.CREATION_DATE) != null) {
+                    doc.add(new Field("fecha", metadata.get(Metadata.CREATION_DATE), Field.Store.YES, Field.Index.NO));
+                } else {
+                    doc.add(new Field("fecha", "", Field.Store.YES, Field.Index.NO));
+                }
+                if (file.getAbsolutePath() != null) {
+                    doc.add(new Field("path", file.getAbsolutePath(), Field.Store.YES, Field.Index.NO));
+                } else {
+                    doc.add(new Field("path", "", Field.Store.YES, Field.Index.NO));
+                }
+                if (metadata.get("title") != null) {
+                    doc.add(new Field("title", metadata.get("title"), Field.Store.YES, Field.Index.NO));
+                } else {
+                    doc.add(new Field("title", "", Field.Store.YES, Field.Index.NO));
+                }
+                if (metadata.get("author") != null) {
+                    doc.add(new Field("author", metadata.get("author"), Field.Store.YES, Field.Index.NO));
+                } else {
+                    doc.add(new Field("author", "", Field.Store.YES, Field.Index.NO));
+                }
+                documents.add(doc);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(SearchDocsView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }
+
+    public List<Document> parseColeccion(){
+        if(pdfFiltro){
+            PDFParser pdfParser=new PDFParser();
+            parseColeccionGeneric(pdfColeccion, pdfParser);
+            }
+        if(txtFiltro){
+            TXTParser txtParser=new TXTParser();
+            parseColeccionGeneric(txtColeccion, txtParser);
+            }
+        if(htmlFiltro){
+            HtmlParser htmlParser= new HtmlParser();
+            parseColeccionGeneric(htmlColeccion, htmlParser);
+        }
+
+        return documents;
+    }
+
     public void parseColeccionPdf(){
          InputStream input;
 

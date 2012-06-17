@@ -330,12 +330,13 @@ public class SearchDocsView extends FrameView {
             //FileUtils.selectFiles(fileBox.getSelectedFile());
             GenerarColeccionArchivos coleccion=new GenerarColeccionArchivos(fileBox.getSelectedFile());
             coleccion.generarColeccion();
-            coleccion.parseColeccionPdf();
-            List documentos=coleccion.getDocuments();
+            
+            List documentos=coleccion.parseColeccion();
             for (int i = 0; i < documentos.size(); i++) {
                 Document doc = (Document) documentos.get(i);
                 System.out.println(i+"<============================================>");
                 System.out.println(doc.get("title"));
+                System.out.println(doc.get("path"));
                 System.out.println("<============================================>");
             }
         }
