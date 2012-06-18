@@ -24,6 +24,7 @@ import searchdocs.SearchDocsView;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.tika.parser.AbstractParser;
+import org.apache.tika.parser.AutoDetectParser;
 import org.apache.tika.parser.Parser;
 import org.apache.tika.parser.html.HtmlParser;
 import org.apache.tika.parser.txt.TXTParser;
@@ -255,6 +256,10 @@ public class GenerarColeccionArchivos {
         if(htmlFiltro){
             HtmlParser htmlParser= new HtmlParser();
             parseColeccionGeneric(htmlColeccion, htmlParser);
+        }
+        if(docFiltro){
+            AutoDetectParser docParser=new AutoDetectParser();
+            parseColeccionGeneric(docColeccion, docParser);
         }
 
         return documents;
