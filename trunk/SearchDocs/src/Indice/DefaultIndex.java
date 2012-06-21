@@ -41,12 +41,24 @@ import org.apache.lucene.util.Version;
 public class DefaultIndex {
 	private static FSDirectory dir;
 	private static Analyzer analyzer;
-
+        /**
+         * Construye el indice con el nombre pasado como parametro.
+         *
+         * @param nombre
+         * @throws IOException
+         */
         public DefaultIndex(String nombre) throws IOException{
             dir = new SimpleFSDirectory(new File(nombre));
 	    analyzer = new StandardAnalyzer(Version.LUCENE_30);
         }
-
+        /**
+         * Agrega una coleccion de documentos en el indice.
+         * 
+         * @param elementos
+         * @throws CorruptIndexException
+         * @throws LockObtainFailedException
+         * @throws IOException
+         */
         public void agregarDocuments(List<Document> elementos) throws CorruptIndexException, LockObtainFailedException, IOException{
             IndexWriter writer = new IndexWriter(dir, analyzer, true, IndexWriter.MaxFieldLength.UNLIMITED);
             writer.setUseCompoundFile(false);
@@ -59,7 +71,7 @@ public class DefaultIndex {
 
         }
         /**
-	 * Este metodo solicita los documentos los criterios de indexacion
+	 * Este metodo solicita los documentos los criterios de indexacion. No se utiliza!
 	 *
 	 * @param analyzer
 	 * @param Documents
@@ -81,7 +93,8 @@ public class DefaultIndex {
 			   doc.add(new Field("contenido", documento.getContenido(), Field.Store.YES, Field.Index.ANALYZED));
 			   doc.add(new Field("extension", documento.getExtension(), Field.Store.YES, Field.Index.NO));
 			   doc.add(new Field("fecha", documento.getFecha(), Field.Store.YES, Field.Index.NO));
-			   //doc.add(new Field("carpetas", documento.getPath(), Field.Store.YES, Field.Index.NO));
+			  
+                           //doc.add(new Field("carpetas", documento.getPath(), Field.Store.YES, Field.Index.NO));
 			   writer.addDocument(doc);
 			   writer.optimize();
 			   writer.commit();
