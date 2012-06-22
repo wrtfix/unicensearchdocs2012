@@ -31,10 +31,14 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.ListModel;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.SimpleAnalyzer;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import utils.GenerarColeccionArchivos;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.TermQuery;
+import org.apache.lucene.util.Version;
 
 /**
  * The application's main frame.
@@ -469,7 +473,8 @@ public class SearchDocsView extends FrameView {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
             
         try {
-            indice = new DefaultIndex("el-indice");
+            Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_30);
+            indice = new DefaultIndex("el-indice", analyzer);
             indice.agregarDocuments(documentos);
             statusMessageLabel.setText("Se ha creado el indice");
         } catch (IOException ex) {
