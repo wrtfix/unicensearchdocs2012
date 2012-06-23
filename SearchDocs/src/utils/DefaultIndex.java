@@ -11,10 +11,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
-
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
-import org.apache.lucene.document.Field;
 import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
@@ -28,7 +26,7 @@ import org.apache.lucene.search.TopScoreDocCollector;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.LockObtainFailedException;
 import org.apache.lucene.store.SimpleFSDirectory;
-import utils.AnalizadorEspanol;
+
 
 /**
  *  Este codigo es para analizar e indexar documentos
