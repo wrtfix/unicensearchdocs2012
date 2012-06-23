@@ -44,7 +44,7 @@ public class DefaultIndex {
          * @param nombre
          * @throws IOException
          */
-        public DefaultIndex(String nombre, Analyzer anayzer) throws IOException{
+        public DefaultIndex(String nombre, Analyzer analyzer) throws IOException{
             dir = new SimpleFSDirectory(new File(nombre));
             this.analyzer = analyzer;
         }
