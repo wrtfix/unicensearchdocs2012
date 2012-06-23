@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.Vector;
 
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.SimpleAnalyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.index.CorruptIndexException;
@@ -22,7 +20,6 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.ParseException;
-import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
@@ -31,7 +28,7 @@ import org.apache.lucene.search.TopScoreDocCollector;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.LockObtainFailedException;
 import org.apache.lucene.store.SimpleFSDirectory;
-import org.apache.lucene.util.Version;
+import utils.AnalizadorEspanol;
 
 /**
  *  Este codigo es para analizar e indexar documentos
@@ -47,9 +44,9 @@ public class DefaultIndex {
          * @param nombre
          * @throws IOException
          */
-        public DefaultIndex(String nombre) throws IOException{
+        public DefaultIndex(String nombre, Analyzer anayzer) throws IOException{
             dir = new SimpleFSDirectory(new File(nombre));
-	    analyzer = new StandardAnalyzer(Version.LUCENE_30);
+            this.analyzer = analyzer;
         }
         /**
          * Agrega una coleccion de documentos en el indice.
@@ -60,48 +57,15 @@ public class DefaultIndex {
          * @throws IOException
          */
         public void agregarDocuments(List<Document> elementos) throws CorruptIndexException, LockObtainFailedException, IOException{
-            IndexWriter writer = new IndexWriter(dir, analyzer, true, IndexWriter.MaxFieldLength.UNLIMITED);
-            writer.setUseCompoundFile(false);
+            IndexWriter writer = new IndexWriter(dir, new AnalizadorEspanol(),IndexWriter.MaxFieldLength.LIMITED);
             for(Document doc: elementos){
-                writer.addDocument(doc);
-                writer.optimize();
-                writer.commit();
+                if (doc != null) {
+                    writer.addDocument(doc);
+                }
             }
+            writer.optimize();
             writer.close();
-
         }
-        /**
-	 * Este metodo solicita los documentos los criterios de indexacion. No se utiliza!
-	 *
-	 * @param analyzer
-	 * @param Documents
-	 * @throws CorruptIndexException
-	 * @throws LockObtainFailedException
-	 * @throws IOException
-	 */
-	public static void createIndex(Vector<Documento>  Documents) throws CorruptIndexException, LockObtainFailedException, IOException {
-
-		IndexWriter writer = new IndexWriter(dir, analyzer, true, IndexWriter.MaxFieldLength.UNLIMITED);
-		writer.setUseCompoundFile(false);
-
-		 // Obtener todos los campos del documento a analizar
-		for (Documento documento : Documents)
-		{
-
-			   Document doc = new Document();
-			   // Esto deberia esta generado a partir de un criterio de busqueda
-			   doc.add(new Field("contenido", documento.getContenido(), Field.Store.YES, Field.Index.ANALYZED));
-			   doc.add(new Field("extension", documento.getExtension(), Field.Store.YES, Field.Index.NO));
-			   doc.add(new Field("fecha", documento.getFecha(), Field.Store.YES, Field.Index.NO));
-			  
-                           //doc.add(new Field("carpetas", documento.getPath(), Field.Store.YES, Field.Index.NO));
-			   writer.addDocument(doc);
-			   writer.optimize();
-			   writer.commit();
-
-		}
-
-	}
 
         /**
 	 * Muestra el indice
@@ -123,7 +87,7 @@ public class DefaultIndex {
 		r.close();
 	}
         /**
-	 * Este metodo elimina un documento indexado
+         * This method remove document index
 	 * @param dir archivo en el que se encuentra el indice
 	 * @param term consulta por la cual se considerar la eliminacion de documentos
 	 * @throws CorruptIndexException

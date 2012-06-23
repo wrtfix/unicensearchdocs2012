@@ -8,9 +8,11 @@ package utils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -190,51 +192,49 @@ public class GenerarColeccionArchivos {
                     Logger.getLogger(GenerarColeccionArchivos.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                //System.out.println("Title: " + metadata.get("title"));
-
-                //System.out.println("Author: " + metadata.get("Author"));
-
-                //System.out.println("Fecha: " + metadata.get(Metadata.CREATION_DATE));
-
-                //System.out.println("Extension: " + metadata.get(Metadata.CONTENT_TYPE));
-
-                //System.out.println("Path: " + file.getAbsolutePath());
-                //System.out.println("<============================================>");
-                //System.out.println("Contenido" +textHandler.toString());
-                //System.out.println("<============================================>");
                 Document doc = new Document();
 
-                if (textHandler.toString() != null) {
-                    doc.add(new Field("contenido", textHandler.toString(), Field.Store.YES, Field.Index.ANALYZED));
+                if (textHandler.toString() != null && textHandler.toString().trim().compareTo(" ")!=0) {
+                    doc.add(new Field("contenido",textHandler.toString().trim(), Field.Store.NO,Field.Index.ANALYZED, Field.TermVector.YES));
+                    
                 } else {
-                    doc.add(new Field("contenido", "", Field.Store.YES, Field.Index.ANALYZED));
+                    doc.add(new Field("contenido", "No califica", Field.Store.YES, Field.Index.ANALYZED));
                 }
 
                 if (metadata.get(Metadata.CONTENT_TYPE) != null) {
                     doc.add(new Field("extension", metadata.get(Metadata.CONTENT_TYPE), Field.Store.YES, Field.Index.NO));
                 } else {
-                    doc.add(new Field("extension", "", Field.Store.YES, Field.Index.NO));
+                    doc.add(new Field("extension", "No califica", Field.Store.YES, Field.Index.NO));
                 }
-                if (metadata.get(Metadata.CREATION_DATE) != null) {
+                if (metadata.get(Metadata.CREATION_DATE) != null && metadata.get(Metadata.CREATION_DATE).compareTo("") !=0) {
                     doc.add(new Field("fecha", metadata.get(Metadata.CREATION_DATE), Field.Store.YES, Field.Index.NO));
                 } else {
-                    doc.add(new Field("fecha", "", Field.Store.YES, Field.Index.NO));
+                    doc.add(new Field("fecha", "No califica", Field.Store.YES, Field.Index.NO));
                 }
                 if (file.getAbsolutePath() != null) {
                     doc.add(new Field("path", file.getAbsolutePath(), Field.Store.YES, Field.Index.NO));
                 } else {
                     doc.add(new Field("path", "", Field.Store.YES, Field.Index.NO));
                 }
-                if (metadata.get("title") != null) {
+                if (metadata.get("title") != null && metadata.get("title").compareTo("")!=0) {
                     doc.add(new Field("title", metadata.get("title"), Field.Store.YES, Field.Index.NO));
                 } else {
-                    doc.add(new Field("title", "", Field.Store.YES, Field.Index.NO));
+                    doc.add(new Field("title", "No califica", Field.Store.YES, Field.Index.NO));
                 }
-                if (metadata.get("author") != null) {
+                if (metadata.get("author") != null && metadata.get("author").compareTo("") != 0) {
                     doc.add(new Field("author", metadata.get("author"), Field.Store.YES, Field.Index.NO));
                 } else {
-                    doc.add(new Field("author", "", Field.Store.YES, Field.Index.NO));
+                    doc.add(new Field("author", "No califica", Field.Store.YES, Field.Index.NO));
                 }
+                Date date=new Date(file.lastModified());
+                if ( date!= null) {
+                    String fecha=date.toString();
+                    doc.add(new Field("fechaModificacion",fecha, Field.Store.YES, Field.Index.NO));
+
+                } else {
+                    doc.add(new Field("fechaModificacion", "", Field.Store.YES, Field.Index.NO));
+                }
+                
                 documents.add(doc);
             }
         } catch (FileNotFoundException ex) {
@@ -292,51 +292,49 @@ public class GenerarColeccionArchivos {
                     Logger.getLogger(GenerarColeccionArchivos.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
-                //System.out.println("Title: " + metadata.get("title"));
-                
-                //System.out.println("Author: " + metadata.get("Author"));
-                
-                //System.out.println("Fecha: " + metadata.get(Metadata.CREATION_DATE));
-                
-                //System.out.println("Extension: " + metadata.get(Metadata.CONTENT_TYPE));
-                
-                //System.out.println("Path: " + file.getAbsolutePath());
-                //System.out.println("<============================================>");
-                //System.out.println("Contenido" +textHandler.toString());
-                //System.out.println("<============================================>");
                 Document doc = new Document();
                 
-                if (textHandler.toString() != null) {
+                /*if (textHandler.toString() != null) {
                     doc.add(new Field("contenido", textHandler.toString(), Field.Store.YES, Field.Index.ANALYZED));
                 } else {
                     doc.add(new Field("contenido", "", Field.Store.YES, Field.Index.ANALYZED));
-                }
+                }*/
 
-                if (metadata.get(Metadata.CONTENT_TYPE) != null) {
+                /*if (metadata.get(Metadata.CONTENT_TYPE) != null) {
                     doc.add(new Field("extension", metadata.get(Metadata.CONTENT_TYPE), Field.Store.YES, Field.Index.NO));
                 } else {
                     doc.add(new Field("extension", "", Field.Store.YES, Field.Index.NO));
-                }
-                if (metadata.get(Metadata.CREATION_DATE) != null) {
+                }*/
+                if (metadata.get(Metadata.CREATION_DATE) != null && metadata.get(Metadata.CREATION_DATE).compareTo(" ") !=0) {
                     doc.add(new Field("fecha", metadata.get(Metadata.CREATION_DATE), Field.Store.YES, Field.Index.NO));
                 } else {
-                    doc.add(new Field("fecha", "", Field.Store.YES, Field.Index.NO));
+                    doc.add(new Field("fecha", "No califica", Field.Store.YES, Field.Index.NO));
                 }
                 if (file.getAbsolutePath() != null) {
                     doc.add(new Field("path", file.getAbsolutePath(), Field.Store.YES, Field.Index.NO));
                 } else {
                     doc.add(new Field("path", "", Field.Store.YES, Field.Index.NO));
                 }
-                if (metadata.get("title") != null) {
+                if (metadata.get("title") != null && metadata.get("title").compareTo(" ")!=0) {
                     doc.add(new Field("title", metadata.get("title"), Field.Store.YES, Field.Index.NO));
                 } else {
-                    doc.add(new Field("title", "", Field.Store.YES, Field.Index.NO));
-                }
+                    doc.add(new Field("title", "No califica", Field.Store.YES, Field.Index.NO));
+                }/*
                 if (metadata.get("author") != null) {
                     doc.add(new Field("author", metadata.get("author"), Field.Store.YES, Field.Index.NO));
                 } else {
                     doc.add(new Field("author", "", Field.Store.YES, Field.Index.NO));
-                }
+                }*/
+                /*
+                Date date = new Date(file.lastModified());
+                if ( date!= null) {
+                    String fecha=date.toString();
+                    doc.add(new Field("fechaModificacion",fecha, Field.Store.YES, Field.Index.NO));
+
+                } else {
+                    doc.add(new Field("fechaModificacion", "", Field.Store.YES, Field.Index.NO));
+                }*/
+                
                 documents.add(doc);
             }
         } catch (FileNotFoundException ex) {
