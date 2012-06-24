@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.SimpleAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.IndexReader;
@@ -65,6 +66,13 @@ public class DefaultIndex {
             writer.close();
         }
 
+        public void agregar(Document elementos) throws CorruptIndexException, LockObtainFailedException, IOException{
+            IndexWriter writer = new IndexWriter(dir, new AnalizadorEspanol(),IndexWriter.MaxFieldLength.LIMITED);
+            writer.addDocument(elementos);
+            writer.optimize();
+            writer.close();
+        }
+
         /**
 	 * Muestra el indice
 	 *
@@ -93,9 +101,10 @@ public class DefaultIndex {
 	 */
 
 	public static void removerIndice(Term term) throws CorruptIndexException, IOException{
-		IndexWriter writer = new IndexWriter(dir, analyzer, true, IndexWriter.MaxFieldLength.UNLIMITED);
+		IndexWriter writer = new IndexWriter(dir, new SimpleAnalyzer(), true, IndexWriter.MaxFieldLength.UNLIMITED);
 		writer.deleteDocuments(term);
-		writer.close();
+		
+                writer.close();
 
 	}
 
