@@ -37,14 +37,16 @@ import org.apache.lucene.store.SimpleFSDirectory;
 public class DefaultIndex {
 	private static FSDirectory dir;
 	private static Analyzer analyzer;
+        private static IndexReader reader;
+        private static IndexWriter writer;
+
         /**
          * Construye el indice con el nombre pasado como parametro.
          *
          * @param nombre
          * @throws IOException
          */
-        public DefaultIndex(String nombre, Analyzer analyzer) throws IOException{
-            dir = new SimpleFSDirectory(new File(nombre));
+        public DefaultIndex(Analyzer analyzer) throws IOException{
             this.analyzer = analyzer;
         }
         /**
@@ -56,22 +58,15 @@ public class DefaultIndex {
          * @throws IOException
          */
         public void agregarDocuments(List<Document> elementos) throws CorruptIndexException, LockObtainFailedException, IOException{
-            IndexWriter writer = new IndexWriter(dir, new AnalizadorEspanol(),IndexWriter.MaxFieldLength.LIMITED);
             for(Document doc: elementos){
                 if (doc != null) {
                     writer.addDocument(doc);
                 }
             }
             writer.optimize();
-            writer.close();
         }
 
-        public void agregar(Document elementos) throws CorruptIndexException, LockObtainFailedException, IOException{
-            IndexWriter writer = new IndexWriter(dir, new AnalizadorEspanol(),IndexWriter.MaxFieldLength.LIMITED);
-            writer.addDocument(elementos);
-            writer.optimize();
-            writer.close();
-        }
+
 
         /**
 	 * Muestra el indice
@@ -92,21 +87,9 @@ public class DefaultIndex {
 		}
 		r.close();
 	}
-        /**
-         * This method remove document index
-	 * @param dir archivo en el que se encuentra el indice
-	 * @param term consulta por la cual se considerar la eliminacion de documentos
-	 * @throws CorruptIndexException
-	 * @throws IOException
-	 */
 
-	public static void removerIndice(Term term) throws CorruptIndexException, IOException{
-		IndexWriter writer = new IndexWriter(dir, new SimpleAnalyzer(), true, IndexWriter.MaxFieldLength.UNLIMITED);
-		writer.deleteDocuments(term);
-		
-                writer.close();
 
-	}
+
 
         /**
 	 * Busca los documentos que se encuentran indexados
@@ -124,13 +107,11 @@ public class DefaultIndex {
 
 	public static Vector<Document> buscarIndice(TermQuery termino) throws CorruptIndexException, IOException, ParseException{
 
-
-		//Query q = new QueryParser(Version.LUCENE_30, criterio, analyzer).parse(querystr);
+                //Query q = new QueryParser(Version.LUCENE_30, criterio, analyzer).parse(querystr);
 		Query q = termino;
 		//QueryParser q = new QueryParser("contenido",new SimpleAnalyser(analyzer));
 
-
-		int hitsPerPage = 10;
+                int hitsPerPage = 10;
 		IndexReader reader = IndexReader.open(dir);
 		IndexSearcher searcher = new IndexSearcher(reader);
 		TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, true);
@@ -153,5 +134,42 @@ public class DefaultIndex {
 		
 
 	}
+        /**
+         * Permite abrir un indice
+         * @param path
+         */
+
+        public void abrirIndice(String path) throws IOException{
+            dir = new SimpleFSDirectory(new File(path));
+            writer = new IndexWriter(dir, new AnalizadorEspanol(),false,IndexWriter.MaxFieldLength.UNLIMITED);
+            reader = IndexReader.open(dir,false);
+        }
+        /**
+         * This method remove document index
+	 * @param dir archivo en el que se encuentra el indice
+	 * @param term consulta por la cual se considerar la eliminacion de documentos
+	 * @throws CorruptIndexException
+	 * @throws IOException
+	 */
+        
+        public static void eliminarCarpeta(Term term) throws CorruptIndexException, IOException{
+            reader.deleteDocuments(term);
+	}
+
+        public void agregarCarpetas(Document elementos) throws CorruptIndexException, LockObtainFailedException, IOException{
+            writer.addDocument(elementos);
+            writer.optimize();
+        }
+
+        public void cerrarIndice() throws CorruptIndexException, IOException{
+            writer.close();
+            reader.close();
+        }
+
+        public void nuevoIndice(String nombre) throws IOException{
+            dir = new SimpleFSDirectory(new File(nombre));
+            writer = new IndexWriter(dir, new AnalizadorEspanol(),true,IndexWriter.MaxFieldLength.UNLIMITED);
+            reader = IndexReader.open(dir,false);
+        }
 
 }
