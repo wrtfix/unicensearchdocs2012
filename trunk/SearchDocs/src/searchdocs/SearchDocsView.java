@@ -5,6 +5,7 @@
 package searchdocs;
 
 
+import org.apache.lucene.store.LockObtainFailedException;
 import utils.DefaultIndex;
 import java.awt.Component;
 import java.awt.Desktop;
@@ -119,6 +120,14 @@ public class SearchDocsView extends FrameView {
         SearchDocsApp.getApplication().show(aboutBox);
     }
 
+    public DefaultIndex getIndice() {
+        return indice;
+    }
+
+    public void setIndice(DefaultIndex indice) {
+        this.indice = indice;
+    }
+
     
 
     /** This method is called from within the constructor to
@@ -133,7 +142,6 @@ public class SearchDocsView extends FrameView {
         mainPanel = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
@@ -158,10 +166,13 @@ public class SearchDocsView extends FrameView {
         jComboBox1 = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
         javax.swing.JMenu helpMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
@@ -181,14 +192,6 @@ public class SearchDocsView extends FrameView {
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
-            }
-        });
-
-        jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
-        jButton2.setName("jButton2"); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
             }
         });
 
@@ -280,6 +283,9 @@ public class SearchDocsView extends FrameView {
 
         jTextField6.setName("jTextField6"); // NOI18N
 
+        jLabel9.setText(resourceMap.getString("jLabel9.text")); // NOI18N
+        jLabel9.setName("jLabel9"); // NOI18N
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -323,9 +329,8 @@ public class SearchDocsView extends FrameView {
                                 .addGap(75, 75, 75))
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
-                                .addComponent(jButton2)
-                                .addGap(106, 106, 106))
+                                .addGap(70, 70, 70)
+                                .addComponent(jLabel9))
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -349,11 +354,16 @@ public class SearchDocsView extends FrameView {
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12))
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -411,7 +421,30 @@ public class SearchDocsView extends FrameView {
 
         jMenuItem2.setText(resourceMap.getString("jMenuItem2.text")); // NOI18N
         jMenuItem2.setName("jMenuItem2"); // NOI18N
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         fileMenu.add(jMenuItem2);
+
+        jMenuItem3.setText(resourceMap.getString("jMenuItem3.text")); // NOI18N
+        jMenuItem3.setName("jMenuItem3"); // NOI18N
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jMenuItem3);
+
+        jMenuItem4.setText(resourceMap.getString("jMenuItem4.text")); // NOI18N
+        jMenuItem4.setName("jMenuItem4"); // NOI18N
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jMenuItem4);
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(searchdocs.SearchDocsApp.class).getContext().getActionMap(SearchDocsView.class, this);
         exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
@@ -526,58 +559,95 @@ public class SearchDocsView extends FrameView {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
+        if (aboutBox == null) {
+            JFrame mainFrame = SearchDocsApp.getApplication().getMainFrame();
+            aboutBox = new SearchDocsNuevoIndiceBox(mainFrame,this);
+            aboutBox.setLocationRelativeTo(mainFrame);
+            aboutBox.setTitle("Nuevo indice");
+        }
+        SearchDocsApp.getApplication().show(aboutBox);
+
         
-        if (fileBox== null) {
-            fileBox=new JFileChooser();
-            fileBox.setDialogTitle("Seleccionar la carpeta a adjuntar");
-            fileBox.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            fileBox.setApproveButtonText("Seleccionar Directorio");
-            statusMessageLabel.setText("Cargando...");
-            fileBox.showOpenDialog(MainPanel);
-            //FileUtils.selectFiles(fileBox.getSelectedFile());
-            GenerarColeccionArchivos coleccion=new GenerarColeccionArchivos(fileBox.getSelectedFile());
-            coleccion.generarColeccion();
-            documentos=coleccion.parseColeccion();
-            for (int i = 0; i < documentos.size(); i++) {
-                Document doc = (Document) documentos.get(i);
-                System.out.println(i+"<============================================>");
-                System.out.println(doc.get("title"));
-                System.out.println(doc.get("path"));
-                System.out.println(doc.get("fecha"));
-                System.out.println(doc.get("extension"));
-                System.out.println(doc.get("author"));
-                System.out.println(doc.get("fechaModificacion"));
-                System.out.println("<============================================>");
-                System.out.println(doc.get("contenido"));
-                System.out.println("<============================================>");
-            }
-            statusMessageLabel.setText("La carga se realizo con exito!");
-
-        }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-            
-        try {
-            //Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_30);
-              Analyzer analyzer = new AnalizadorEspanol();
-            //Analyzer analyzer = new SimpleAnalyzer();
-            indice = new DefaultIndex("el-indice", analyzer);
-            indice.agregarDocuments(documentos);
-            statusMessageLabel.setText("Se ha creado el indice");
-        } catch (IOException ex) {
-            Logger.getLogger(SearchDocsView.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
         this.ejecutarElemnto(jList1.getSelectedValue().toString());
     }//GEN-LAST:event_jList1ValueChanged
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        try {
+            // Agergar carpeta al indice ya seleccionado
+            fileBox = new JFileChooser();
+            fileBox.setDialogTitle("Seleccionar la carpeta a agregar al indice");
+            fileBox.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            fileBox.setApproveButtonText("Agregar Directorio");
+            statusMessageLabel.setText("Agregando carpeta en el indice...");
+            fileBox.showOpenDialog(MainPanel);
+            GenerarColeccionArchivos coleccion = new GenerarColeccionArchivos(fileBox.getSelectedFile());
+            coleccion.generarColeccion();
+            documentos = coleccion.parseColeccion();
+            indice.agregarDocuments(documentos);
+            statusMessageLabel.setText("Carpeta agregada");
+            
+        } catch (CorruptIndexException ex) {
+            Logger.getLogger(SearchDocsView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LockObtainFailedException ex) {
+            Logger.getLogger(SearchDocsView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SearchDocsView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // Eliminar una carpeta del indice
+            fileBox=new JFileChooser();
+            fileBox.setDialogTitle("Seleccionar la carpeta a eliminar del indice");
+            fileBox.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            fileBox.setApproveButtonText("Eliminar Directorio");
+            statusMessageLabel.setText("Eliminar carpeta en el indice...");
+            fileBox.showOpenDialog(MainPanel);
+            Term term;
+            File file = fileBox.getSelectedFile();
+            GenerarColeccionArchivos coleccionFiles= new GenerarColeccionArchivos(file);
+            coleccionFiles.generarColeccion();
+            List files=coleccionFiles.getColeccion();
+            for(int i=0;i<files.size();i++){
+            try {
+                term = new Term("path", ((File) files.get(i)).getAbsolutePath());
+                indice.eliminarCarpeta(term);
+            } catch (CorruptIndexException ex) {
+                Logger.getLogger(SearchDocsView.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(SearchDocsView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
+            statusMessageLabel.setText("Se elimino con exito!");
+
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        try {
+            // Abrir indice existente
+            fileBox = new JFileChooser();
+            fileBox.setDialogTitle("Seleccionar un indice ya existente");
+            fileBox.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            fileBox.setApproveButtonText("Abrir Indice");
+            statusMessageLabel.setText("Abriendo indice ya existente...");
+            fileBox.showOpenDialog(MainPanel);
+            //Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_30);
+            Analyzer analyzer = new AnalizadorEspanol();
+            //Analyzer analyzer = new SimpleAnalyzer();
+            indice = new DefaultIndex(analyzer);
+            indice.abrirIndice(fileBox.getSelectedFile());
+            statusMessageLabel.setText("Indice abierto exitosamente");
+        } catch (IOException ex) {
+            Logger.getLogger(SearchDocsView.class.getName()).log(Level.SEVERE, null, ex);
+            statusMessageLabel.setText("No se pudo abrir el indice");
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JFormattedTextField jFormattedTextField1;
@@ -590,9 +660,12 @@ public class SearchDocsView extends FrameView {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JList jList1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;

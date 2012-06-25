@@ -211,9 +211,9 @@ public class GenerarColeccionArchivos {
                     doc.add(new Field("fecha", "No califica", Field.Store.YES, Field.Index.NO));
                 }
                 if (file.getAbsolutePath() != null) {
-                    doc.add(new Field("path", file.getAbsolutePath(), Field.Store.YES, Field.Index.NO));
+                    doc.add(new Field("path", file.getAbsolutePath(), Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
                 } else {
-                    doc.add(new Field("path", "", Field.Store.YES, Field.Index.NO));
+                    doc.add(new Field("path", "", Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
                 }
                 if (metadata.get("title") != null && metadata.get("title").compareTo("")!=0) {
                     doc.add(new Field("title", metadata.get("title"), Field.Store.YES, Field.Index.NO));
