@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.SimpleAnalyzer;
 import org.apache.lucene.document.Document;
@@ -58,9 +60,11 @@ public class DefaultIndex {
          * @throws IOException
          */
         public void agregarDocuments(List<Document> elementos) throws CorruptIndexException, LockObtainFailedException, IOException{
+
             for(Document doc: elementos){
                 if (doc != null) {
                     writer.addDocument(doc);
+                    writer.commit();
                 }
             }
             writer.optimize();
@@ -139,9 +143,9 @@ public class DefaultIndex {
          * @param path
          */
 
-        public void abrirIndice(String path) throws IOException{
-            dir = new SimpleFSDirectory(new File(path));
-            writer = new IndexWriter(dir, new AnalizadorEspanol(),false,IndexWriter.MaxFieldLength.UNLIMITED);
+        public void abrirIndice(File file) throws IOException{
+            dir = new SimpleFSDirectory(file);
+            writer = new IndexWriter(dir, analyzer,false,IndexWriter.MaxFieldLength.UNLIMITED);
             reader = IndexReader.open(dir,false);
         }
         /**
@@ -153,10 +157,16 @@ public class DefaultIndex {
 	 */
         
         public static void eliminarCarpeta(Term term) throws CorruptIndexException, IOException{
+            writer.close();
+            System.out.println("se borrara"+term.text());
+            reader = IndexReader.open(dir,false);
             reader.deleteDocuments(term);
+            reader.close();
+            writer = new IndexWriter(dir, analyzer,false,IndexWriter.MaxFieldLength.UNLIMITED);
+            
 	}
 
-        public void agregarCarpetas(Document elementos) throws CorruptIndexException, LockObtainFailedException, IOException{
+        public void agregarDocument(Document elementos) throws CorruptIndexException, LockObtainFailedException, IOException{
             writer.addDocument(elementos);
             writer.optimize();
         }
@@ -168,8 +178,26 @@ public class DefaultIndex {
 
         public void nuevoIndice(String nombre) throws IOException{
             dir = new SimpleFSDirectory(new File(nombre));
-            writer = new IndexWriter(dir, new AnalizadorEspanol(),true,IndexWriter.MaxFieldLength.UNLIMITED);
-            reader = IndexReader.open(dir,false);
+            writer = new IndexWriter(dir, analyzer,true,IndexWriter.MaxFieldLength.UNLIMITED);
+            
+        }
+
+        public void cerrarWrite(){
+        try {
+            writer.close();
+        } catch (CorruptIndexException ex) {
+            Logger.getLogger(DefaultIndex.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(DefaultIndex.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+
+        public void cerrarReader(){
+        try {
+            reader.close();
+        } catch (IOException ex) {
+            Logger.getLogger(DefaultIndex.class.getName()).log(Level.SEVERE, null, ex);
+        }
         }
 
 }
