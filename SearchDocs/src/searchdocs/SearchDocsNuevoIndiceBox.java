@@ -184,9 +184,10 @@ public class SearchDocsNuevoIndiceBox extends javax.swing.JDialog {
             //Analyzer analyzer = new SimpleAnalyzer();
             DefaultIndex indice = new DefaultIndex(analyzer);
             indice.nuevoIndice(jTextFieldNombre.getText());
-            System.out.println(jTextFieldNombre.getText());
+            //System.out.println(jTextFieldNombre.getText());
             indice.agregarDocuments(documentos);
             vistaPrincipal.setIndice(indice);
+            vistaPrincipal.setNombreIndice(jTextFieldNombre.getText());
             dispose();
 
         } catch (IOException ex) {
