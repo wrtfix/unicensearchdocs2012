@@ -22,24 +22,24 @@ import org.jdesktop.application.TaskMonitor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.net.URI;
+
 import java.util.List;
 import java.util.Vector;
+
 import javax.swing.DefaultListModel;
 import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.ListModel;
+
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.SimpleAnalyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+;
 import utils.GenerarColeccionArchivos;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.TermQuery;
-import org.apache.lucene.util.Version;
+
 import utils.AnalizadorEspanol;
 
 /**
@@ -49,12 +49,13 @@ public class SearchDocsView extends FrameView {
 
     private List documentos;
     private Component MainPanel;
+    private String nombreIndice;
 
     public SearchDocsView(SingleFrameApplication app) {
         super(app);
-
         initComponents();
-
+        jMenuItemAgregarCarpeta.setEnabled(false);
+        jMenuItemEliminarCarpeta.setEnabled(false);
         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
         int messageTimeout = resourceMap.getInteger("StatusBar.messageTimeout");
@@ -128,6 +129,19 @@ public class SearchDocsView extends FrameView {
         this.indice = indice;
     }
 
+    public String getNombreIndice() {
+        return nombreIndice;
+    }
+
+    public void setNombreIndice(String nombreIndice) {
+        this.getFrame().setTitle("SearchDocs Aplication - Usando el indice "+nombreIndice);
+        jMenuItemAgregarCarpeta.setEnabled(true);
+        jMenuItemEliminarCarpeta.setEnabled(true);
+        this.nombreIndice = nombreIndice;
+    }
+
+
+
     
 
     /** This method is called from within the constructor to
@@ -171,8 +185,8 @@ public class SearchDocsView extends FrameView {
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItemAgregarCarpeta = new javax.swing.JMenuItem();
+        jMenuItemEliminarCarpeta = new javax.swing.JMenuItem();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
         javax.swing.JMenu helpMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
@@ -299,23 +313,23 @@ public class SearchDocsView extends FrameView {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                                .addGap(186, 186, 186)
+                                .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE))
+                            .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                                .addGap(186, 186, 186)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)))
+                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(mainPanelLayout.createSequentialGroup()
@@ -358,7 +372,7 @@ public class SearchDocsView extends FrameView {
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(12, 12, 12))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addContainerGap()
@@ -428,23 +442,23 @@ public class SearchDocsView extends FrameView {
         });
         fileMenu.add(jMenuItem2);
 
-        jMenuItem3.setText(resourceMap.getString("jMenuItem3.text")); // NOI18N
-        jMenuItem3.setName("jMenuItem3"); // NOI18N
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemAgregarCarpeta.setText(resourceMap.getString("jMenuItemAgregarCarpeta.text")); // NOI18N
+        jMenuItemAgregarCarpeta.setName("jMenuItemAgregarCarpeta"); // NOI18N
+        jMenuItemAgregarCarpeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jMenuItemAgregarCarpetaActionPerformed(evt);
             }
         });
-        fileMenu.add(jMenuItem3);
+        fileMenu.add(jMenuItemAgregarCarpeta);
 
-        jMenuItem4.setText(resourceMap.getString("jMenuItem4.text")); // NOI18N
-        jMenuItem4.setName("jMenuItem4"); // NOI18N
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemEliminarCarpeta.setText(resourceMap.getString("jMenuItemEliminarCarpeta.text")); // NOI18N
+        jMenuItemEliminarCarpeta.setName("jMenuItemEliminarCarpeta"); // NOI18N
+        jMenuItemEliminarCarpeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jMenuItemEliminarCarpetaActionPerformed(evt);
             }
         });
-        fileMenu.add(jMenuItem4);
+        fileMenu.add(jMenuItemEliminarCarpeta);
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(searchdocs.SearchDocsApp.class).getContext().getActionMap(SearchDocsView.class, this);
         exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
@@ -559,13 +573,13 @@ public class SearchDocsView extends FrameView {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        if (aboutBox == null) {
+        if (nuevoBox == null) {
             JFrame mainFrame = SearchDocsApp.getApplication().getMainFrame();
-            aboutBox = new SearchDocsNuevoIndiceBox(mainFrame,this);
-            aboutBox.setLocationRelativeTo(mainFrame);
-            aboutBox.setTitle("Nuevo indice");
+            nuevoBox = new SearchDocsNuevoIndiceBox(mainFrame,this);
+            nuevoBox.setLocationRelativeTo(mainFrame);
+            nuevoBox.setTitle("Nuevo indice");
         }
-        SearchDocsApp.getApplication().show(aboutBox);
+        SearchDocsApp.getApplication().show(nuevoBox);
 
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -574,7 +588,7 @@ public class SearchDocsView extends FrameView {
         this.ejecutarElemnto(jList1.getSelectedValue().toString());
     }//GEN-LAST:event_jList1ValueChanged
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jMenuItemAgregarCarpetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAgregarCarpetaActionPerformed
         try {
             // Agergar carpeta al indice ya seleccionado
             fileBox = new JFileChooser();
@@ -596,9 +610,9 @@ public class SearchDocsView extends FrameView {
         } catch (IOException ex) {
             Logger.getLogger(SearchDocsView.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jMenuItemAgregarCarpetaActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void jMenuItemEliminarCarpetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEliminarCarpetaActionPerformed
         // Eliminar una carpeta del indice
             fileBox=new JFileChooser();
             fileBox.setDialogTitle("Seleccionar la carpeta a eliminar del indice");
@@ -623,7 +637,7 @@ public class SearchDocsView extends FrameView {
             }
             statusMessageLabel.setText("Se elimino con exito!");
 
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_jMenuItemEliminarCarpetaActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         try {
@@ -640,6 +654,7 @@ public class SearchDocsView extends FrameView {
             indice = new DefaultIndex(analyzer);
             indice.abrirIndice(fileBox.getSelectedFile());
             statusMessageLabel.setText("Indice abierto exitosamente");
+            this.setNombreIndice(fileBox.getSelectedFile().getName());
         } catch (IOException ex) {
             Logger.getLogger(SearchDocsView.class.getName()).log(Level.SEVERE, null, ex);
             statusMessageLabel.setText("No se pudo abrir el indice");
@@ -664,8 +679,8 @@ public class SearchDocsView extends FrameView {
     private javax.swing.JList jList1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItemAgregarCarpeta;
+    private javax.swing.JMenuItem jMenuItemEliminarCarpeta;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
@@ -694,4 +709,5 @@ public class SearchDocsView extends FrameView {
     private DefaultIndex indice;
     private JDialog aboutBox;
     private JFileChooser fileBox;
+    private JDialog nuevoBox;
 }

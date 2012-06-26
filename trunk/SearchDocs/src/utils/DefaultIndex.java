@@ -86,7 +86,7 @@ public class DefaultIndex {
 		    if (!r.isDeleted(i))
 		    {
 		        Document d = r.document(i);
-		        System.out.println(i+1+". "+d.get("contenido"));
+		        //System.out.println(i+1+". "+d.get("contenido"));
 		    }
 		}
 		r.close();
@@ -123,9 +123,9 @@ public class DefaultIndex {
 		ScoreDoc[] hits = collector.topDocs().scoreDocs;
 
 		// Muestro los resultados obtenidos
-		System.out.println("Resultados de la busqueda de "+termino.toString());
-		System.out.println("Cantidad de Resultados " + hits.length + ".");
-		System.out.println("---------------------------------------------");
+		//System.out.println("Resultados de la busqueda de "+termino.toString());
+		//System.out.println("Cantidad de Resultados " + hits.length + ".");
+		//System.out.println("---------------------------------------------");
 		Vector<Document> resultado = new Vector<Document>();
                 
                 for(int i=0;i<hits.length;++i) {
@@ -158,7 +158,7 @@ public class DefaultIndex {
         
         public static void eliminarCarpeta(Term term) throws CorruptIndexException, IOException{
             writer.close();
-            System.out.println("se borrara"+term.text());
+            //System.out.println("se borrara"+term.text());
             reader = IndexReader.open(dir,false);
             reader.deleteDocuments(term);
             reader.close();

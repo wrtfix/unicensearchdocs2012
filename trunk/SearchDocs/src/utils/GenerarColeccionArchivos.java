@@ -194,7 +194,7 @@ public class GenerarColeccionArchivos {
                 Document doc = new Document();
 
                 if (textHandler.toString() != null && textHandler.toString().trim().compareTo(" ")!=0) {
-                    doc.add(new Field("contenido",textHandler.toString().trim(), Field.Store.NO,Field.Index.ANALYZED, Field.TermVector.YES));
+                    doc.add(new Field("contenido",textHandler.toString().trim(), Field.Store.NO,Field.Index.ANALYZED));
                     
                 } else {
                     doc.add(new Field("contenido", "No califica", Field.Store.YES, Field.Index.ANALYZED));
