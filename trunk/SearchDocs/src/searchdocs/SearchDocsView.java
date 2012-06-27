@@ -572,16 +572,12 @@ public class SearchDocsView extends FrameView {
     }//GEN-LAST:event_jMenuItem1MouseClicked
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        if (nuevoBox == null) {
-            JFrame mainFrame = SearchDocsApp.getApplication().getMainFrame();
-            nuevoBox = new SearchDocsNuevoIndiceBox(mainFrame,this);
-            nuevoBox.setLocationRelativeTo(mainFrame);
-            nuevoBox.setTitle("Nuevo indice");
-        }
+        // Abre el box de nuevo indice
+        JFrame mainFrame = SearchDocsApp.getApplication().getMainFrame();
+        nuevoBox = new SearchDocsNuevoIndiceBox(mainFrame, this);
+        nuevoBox.setLocationRelativeTo(mainFrame);
+        nuevoBox.setTitle("Nuevo indice");
         SearchDocsApp.getApplication().show(nuevoBox);
-
-        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
