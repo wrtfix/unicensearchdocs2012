@@ -34,6 +34,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.KeywordAnalyzer;
+import org.apache.lucene.analysis.SimpleAnalyzer;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.util.Version;
 ;
 import utils.GenerarColeccionArchivos;
 import org.apache.lucene.document.Document;
@@ -160,26 +164,26 @@ public class SearchDocsView extends FrameView {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
         jLabel1 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextFieldTodalasPalabras = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTextFieldFraseExacta = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        jTextFieldAlgunadeEstasPalabras = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        jTextFieldNingunaEstasPalabras = new javax.swing.JTextField();
+        jRadioButtonPDF = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jRadioButtonTXT = new javax.swing.JRadioButton();
+        jRadioButtonDOC = new javax.swing.JRadioButton();
+        jRadioButtonHTML = new javax.swing.JRadioButton();
+        jFormattedTextFieldDesde = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
-        jButton3 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
+        jFormattedTextFieldHasta = new javax.swing.JFormattedTextField();
+        jButtonBusquedaAvanzada = new javax.swing.JButton();
+        jComboBoxCampos = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        jTextFieldBusquedaPorCampo = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
@@ -242,41 +246,41 @@ public class SearchDocsView extends FrameView {
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
 
-        jTextField2.setText(resourceMap.getString("jTextField2.text")); // NOI18N
-        jTextField2.setName("jTextField2"); // NOI18N
+        jTextFieldTodalasPalabras.setText(resourceMap.getString("jTextFieldTodalasPalabras.text")); // NOI18N
+        jTextFieldTodalasPalabras.setName("jTextFieldTodalasPalabras"); // NOI18N
 
         jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
         jLabel2.setName("jLabel2"); // NOI18N
 
-        jTextField3.setName("jTextField3"); // NOI18N
+        jTextFieldFraseExacta.setName("jTextFieldFraseExacta"); // NOI18N
 
         jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
         jLabel3.setName("jLabel3"); // NOI18N
 
-        jTextField4.setName("jTextField4"); // NOI18N
+        jTextFieldAlgunadeEstasPalabras.setName("jTextFieldAlgunadeEstasPalabras"); // NOI18N
 
         jLabel4.setText(resourceMap.getString("jLabel4.text")); // NOI18N
         jLabel4.setName("jLabel4"); // NOI18N
 
-        jTextField5.setName("jTextField5"); // NOI18N
+        jTextFieldNingunaEstasPalabras.setName("jTextFieldNingunaEstasPalabras"); // NOI18N
 
-        jRadioButton1.setText(resourceMap.getString("jRadioButton1.text")); // NOI18N
-        jRadioButton1.setName("jRadioButton1"); // NOI18N
+        jRadioButtonPDF.setText(resourceMap.getString("jRadioButtonPDF.text")); // NOI18N
+        jRadioButtonPDF.setName("jRadioButtonPDF"); // NOI18N
 
         jLabel5.setText(resourceMap.getString("jLabel5.text")); // NOI18N
         jLabel5.setName("jLabel5"); // NOI18N
 
-        jRadioButton2.setText(resourceMap.getString("jRadioButton2.text")); // NOI18N
-        jRadioButton2.setName("jRadioButton2"); // NOI18N
+        jRadioButtonTXT.setText(resourceMap.getString("jRadioButtonTXT.text")); // NOI18N
+        jRadioButtonTXT.setName("jRadioButtonTXT"); // NOI18N
 
-        jRadioButton3.setText(resourceMap.getString("jRadioButton3.text")); // NOI18N
-        jRadioButton3.setName("jRadioButton3"); // NOI18N
+        jRadioButtonDOC.setText(resourceMap.getString("jRadioButtonDOC.text")); // NOI18N
+        jRadioButtonDOC.setName("jRadioButtonDOC"); // NOI18N
 
-        jRadioButton4.setText(resourceMap.getString("jRadioButton4.text")); // NOI18N
-        jRadioButton4.setName("jRadioButton4"); // NOI18N
+        jRadioButtonHTML.setText(resourceMap.getString("jRadioButtonHTML.text")); // NOI18N
+        jRadioButtonHTML.setName("jRadioButtonHTML"); // NOI18N
 
-        jFormattedTextField1.setText(resourceMap.getString("jFormattedTextField1.text")); // NOI18N
-        jFormattedTextField1.setName("jFormattedTextField1"); // NOI18N
+        jFormattedTextFieldDesde.setText(resourceMap.getString("jFormattedTextFieldDesde.text")); // NOI18N
+        jFormattedTextFieldDesde.setName("jFormattedTextFieldDesde"); // NOI18N
 
         jLabel6.setText(resourceMap.getString("jLabel6.text")); // NOI18N
         jLabel6.setName("jLabel6"); // NOI18N
@@ -284,18 +288,23 @@ public class SearchDocsView extends FrameView {
         jLabel7.setText(resourceMap.getString("jLabel7.text")); // NOI18N
         jLabel7.setName("jLabel7"); // NOI18N
 
-        jFormattedTextField2.setName("jFormattedTextField2"); // NOI18N
+        jFormattedTextFieldHasta.setName("jFormattedTextFieldHasta"); // NOI18N
 
-        jButton3.setText(resourceMap.getString("jButton3.text")); // NOI18N
-        jButton3.setName("jButton3"); // NOI18N
+        jButtonBusquedaAvanzada.setText(resourceMap.getString("jButtonBusquedaAvanzada.text")); // NOI18N
+        jButtonBusquedaAvanzada.setName("jButtonBusquedaAvanzada"); // NOI18N
+        jButtonBusquedaAvanzada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBusquedaAvanzadaActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "titulo", "autor", "contenido", "fecha Creacion", "extension", "path", " ", " " }));
-        jComboBox1.setName("jComboBox1"); // NOI18N
+        jComboBoxCampos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "titulo", "autor", "contenido", "fecha Creacion", "extension", "path", " ", " " }));
+        jComboBoxCampos.setName("jComboBoxCampos"); // NOI18N
 
         jLabel8.setText(resourceMap.getString("jLabel8.text")); // NOI18N
         jLabel8.setName("jLabel8"); // NOI18N
 
-        jTextField6.setName("jTextField6"); // NOI18N
+        jTextFieldBusquedaPorCampo.setName("jTextFieldBusquedaPorCampo"); // NOI18N
 
         jLabel9.setText(resourceMap.getString("jLabel9.text")); // NOI18N
         jLabel9.setName("jLabel9"); // NOI18N
@@ -317,7 +326,7 @@ public class SearchDocsView extends FrameView {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                                 .addGap(186, 186, 186)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE))
+                                .addComponent(jTextFieldBusquedaPorCampo, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE))
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
@@ -326,20 +335,20 @@ public class SearchDocsView extends FrameView {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE))))
+                                    .addComponent(jTextFieldTodalasPalabras, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldFraseExacta, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldNingunaEstasPalabras, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldAlgunadeEstasPalabras, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jFormattedTextFieldDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jFormattedTextFieldHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(75, 75, 75))
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -348,18 +357,18 @@ public class SearchDocsView extends FrameView {
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton1)
+                                .addComponent(jRadioButtonPDF)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton2)
+                                .addComponent(jRadioButtonTXT)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton3)
+                                .addComponent(jRadioButtonDOC)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton4)
+                                .addComponent(jRadioButtonHTML)
                                 .addGap(157, 157, 157))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboBoxCampos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
-                                .addComponent(jButton3)
+                                .addComponent(jButtonBusquedaAvanzada)
                                 .addGap(104, 104, 104))))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -380,36 +389,36 @@ public class SearchDocsView extends FrameView {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldTodalasPalabras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton4))
+                    .addComponent(jRadioButtonPDF)
+                    .addComponent(jRadioButtonTXT)
+                    .addComponent(jRadioButtonDOC)
+                    .addComponent(jRadioButtonHTML))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldFraseExacta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(10, 10, 10)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldAlgunadeEstasPalabras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldNingunaEstasPalabras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(51, 51, 51))
                     .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton3)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonBusquedaAvanzada)
+                        .addComponent(jComboBoxCampos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel8)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldBusquedaPorCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -532,16 +541,10 @@ public class SearchDocsView extends FrameView {
             e.printStackTrace();
             }
     }
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        try {
-            TermQuery termino = new TermQuery(new Term("contenido", jTextField1.getText().toString()));
-            // Para abrir los documentos encontrados
-            Vector<Document> resultado = indice.buscarIndice(termino);
 
-            DefaultListModel listModel = new DefaultListModel();
+    private void listarResultado(Vector<Document> resultado){
 
-            
-
+        DefaultListModel listModel = new DefaultListModel();
             statusMessageLabel.setText("De su busqueda se encontraron " + resultado.size() + " elementos");
             for (Document doc : resultado) {
                 //jTextArea1.append(doc.get("path") + "\n");
@@ -549,7 +552,14 @@ public class SearchDocsView extends FrameView {
 
             }
             jList1.setModel(listModel);
-            
+    }
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        try {
+            TermQuery termino = new TermQuery(new Term("contenido", jTextField1.getText().toString()));
+            // Para abrir los documentos encontrados
+
+            Vector<Document> resultado = indice.buscarIndice(termino);
+            this.listarResultado(resultado);
         } catch (CorruptIndexException ex) {
             Logger.getLogger(SearchDocsView.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -644,8 +654,8 @@ public class SearchDocsView extends FrameView {
             fileBox.setApproveButtonText("Abrir Indice");
             statusMessageLabel.setText("Abriendo indice ya existente...");
             fileBox.showOpenDialog(MainPanel);
-            //Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_30);
-            Analyzer analyzer = new AnalizadorEspanol();
+            Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_30);
+            //Analyzer analyzer = new AnalizadorEspanol();
             //Analyzer analyzer = new SimpleAnalyzer();
             indice = new DefaultIndex(analyzer);
             indice.abrirIndice(fileBox.getSelectedFile());
@@ -657,12 +667,68 @@ public class SearchDocsView extends FrameView {
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+
+    private String getTodas(){
+        String qstr = jTextFieldTodalasPalabras.getText().replace(" ", " AND ");
+        System.out.println(qstr);
+        return qstr;
+    }
+    private String getExacta(){
+        String qstr = "\"";
+        qstr.concat(jTextFieldTodalasPalabras.getText());
+        qstr.concat ("\"");
+        System.out.println(qstr);
+        return qstr;
+    }
+
+
+    private String getAlgunas(){
+        String qstr = jTextFieldAlgunadeEstasPalabras.getText().replace(" ", " OR ");
+        System.out.println(qstr);
+        return qstr;
+    }
+
+
+    private void jButtonBusquedaAvanzadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBusquedaAvanzadaActionPerformed
+        try {
+            // This project search documents whith diferent criteries
+             TermQuery termino = null;
+            if (jTextFieldTodalasPalabras.getText() != null) {
+                termino =  new TermQuery(new Term("contenido", this.getTodas()));
+                //termino = new TermQuery(new Term("contenido", jTextFieldTodalasPalabras.getText().toString()));
+            }
+            if (jTextFieldFraseExacta.getText() != null) {
+                termino =  new TermQuery(new Term("contenido", this.getExacta()));
+            }
+
+            if (jTextFieldAlgunadeEstasPalabras.getText() != null)
+            {
+                termino = new TermQuery(new Term("contenido", this.getAlgunas()));
+            }
+            if (jTextFieldNingunaEstasPalabras.getText() != null)
+            {
+                termino = new TermQuery(new Term("contenido", this.getAlgunas()));
+            }
+
+
+            Vector<Document> resultado = indice.buscarIndice(termino);
+            this.listarResultado(resultado);
+            
+        } catch (CorruptIndexException ex) {
+            Logger.getLogger(SearchDocsView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SearchDocsView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(SearchDocsView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonBusquedaAvanzadaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
+    private javax.swing.JButton jButtonBusquedaAvanzada;
+    private javax.swing.JComboBox jComboBoxCampos;
+    private javax.swing.JFormattedTextField jFormattedTextFieldDesde;
+    private javax.swing.JFormattedTextField jFormattedTextFieldHasta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -678,17 +744,17 @@ public class SearchDocsView extends FrameView {
     private javax.swing.JMenuItem jMenuItemAgregarCarpeta;
     private javax.swing.JMenuItem jMenuItemEliminarCarpeta;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioButtonDOC;
+    private javax.swing.JRadioButton jRadioButtonHTML;
+    private javax.swing.JRadioButton jRadioButtonPDF;
+    private javax.swing.JRadioButton jRadioButtonTXT;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextFieldAlgunadeEstasPalabras;
+    private javax.swing.JTextField jTextFieldBusquedaPorCampo;
+    private javax.swing.JTextField jTextFieldFraseExacta;
+    private javax.swing.JTextField jTextFieldNingunaEstasPalabras;
+    private javax.swing.JTextField jTextFieldTodalasPalabras;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JProgressBar progressBar;

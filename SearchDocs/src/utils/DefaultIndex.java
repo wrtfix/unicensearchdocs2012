@@ -21,6 +21,7 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
@@ -29,6 +30,7 @@ import org.apache.lucene.search.TopScoreDocCollector;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.LockObtainFailedException;
 import org.apache.lucene.store.SimpleFSDirectory;
+import org.apache.lucene.util.Version;
 
 
 /**
@@ -39,6 +41,8 @@ import org.apache.lucene.store.SimpleFSDirectory;
 public class DefaultIndex {
 	private static FSDirectory dir;
 	private static Analyzer analyzer;
+
+    
         private static IndexReader reader;
         private static IndexWriter writer;
 
@@ -109,10 +113,11 @@ public class DefaultIndex {
 	 *
 	 */
 
-	public static Vector<Document> buscarIndice(TermQuery termino) throws CorruptIndexException, IOException, ParseException{
 
-                //Query q = new QueryParser(Version.LUCENE_30, criterio, analyzer).parse(querystr);
-		Query q = termino;
+        public static Vector<Document> buscarIndice(TermQuery termino) throws CorruptIndexException, IOException, ParseException{
+
+                Query q = new QueryParser(Version.LUCENE_30, termino.getTerm().field(), analyzer).parse(termino.getTerm().text());
+		//Query q = termino;
 		//QueryParser q = new QueryParser("contenido",new SimpleAnalyser(analyzer));
 
                 int hitsPerPage = 10;

@@ -25,7 +25,7 @@
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="186" pref="186" max="186" attributes="0"/>
-                                  <Component id="jTextField6" pref="273" max="32767" attributes="0"/>
+                                  <Component id="jTextFieldBusquedaPorCampo" pref="273" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -36,10 +36,10 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jTextField1" alignment="0" pref="273" max="32767" attributes="1"/>
-                                      <Component id="jTextField2" alignment="0" pref="273" max="32767" attributes="0"/>
-                                      <Component id="jTextField3" alignment="0" pref="273" max="32767" attributes="0"/>
-                                      <Component id="jTextField5" alignment="0" pref="273" max="32767" attributes="0"/>
-                                      <Component id="jTextField4" alignment="0" pref="273" max="32767" attributes="0"/>
+                                      <Component id="jTextFieldTodalasPalabras" alignment="0" pref="273" max="32767" attributes="0"/>
+                                      <Component id="jTextFieldFraseExacta" alignment="0" pref="273" max="32767" attributes="0"/>
+                                      <Component id="jTextFieldNingunaEstasPalabras" alignment="0" pref="273" max="32767" attributes="0"/>
+                                      <Component id="jTextFieldAlgunadeEstasPalabras" alignment="0" pref="273" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -48,11 +48,11 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jFormattedTextField1" min="-2" pref="124" max="-2" attributes="0"/>
+                                  <Component id="jFormattedTextFieldDesde" min="-2" pref="124" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jFormattedTextField2" min="-2" pref="124" max="-2" attributes="0"/>
+                                  <Component id="jFormattedTextFieldHasta" min="-2" pref="124" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
@@ -63,19 +63,19 @@
                               <Group type="102" attributes="0">
                                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonPDF" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonTXT" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jRadioButton3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonDOC" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jRadioButton4" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonHTML" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jComboBoxCampos" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace pref="152" max="32767" attributes="0"/>
-                                  <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButtonBusquedaAvanzada" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -107,20 +107,20 @@
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldTodalasPalabras" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButton4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jRadioButtonPDF" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jRadioButtonTXT" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jRadioButtonDOC" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jRadioButtonHTML" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jFormattedTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldFraseExacta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jFormattedTextFieldDesde" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jFormattedTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jFormattedTextFieldHasta" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
@@ -128,20 +128,20 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextFieldAlgunadeEstasPalabras" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextFieldNingunaEstasPalabras" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                          <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonBusquedaAvanzada" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBoxCampos" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldBusquedaPorCampo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -224,10 +224,10 @@
             <Property name="name" type="java.lang.String" value="jLabel1" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
+        <Component class="javax.swing.JTextField" name="jTextFieldTodalasPalabras">
           <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="jTextField2.text"/>
-            <Property name="name" type="java.lang.String" value="jTextField2" noResource="true"/>
+            <Property name="text" type="java.lang.String" resourceKey="jTextFieldTodalasPalabras.text"/>
+            <Property name="name" type="java.lang.String" value="jTextFieldTodalasPalabras" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
@@ -236,9 +236,9 @@
             <Property name="name" type="java.lang.String" value="jLabel2" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField3">
+        <Component class="javax.swing.JTextField" name="jTextFieldFraseExacta">
           <Properties>
-            <Property name="name" type="java.lang.String" value="jTextField3" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="jTextFieldFraseExacta" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
@@ -247,9 +247,9 @@
             <Property name="name" type="java.lang.String" value="jLabel3" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField4">
+        <Component class="javax.swing.JTextField" name="jTextFieldAlgunadeEstasPalabras">
           <Properties>
-            <Property name="name" type="java.lang.String" value="jTextField4" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="jTextFieldAlgunadeEstasPalabras" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
@@ -258,15 +258,15 @@
             <Property name="name" type="java.lang.String" value="jLabel4" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField5">
+        <Component class="javax.swing.JTextField" name="jTextFieldNingunaEstasPalabras">
           <Properties>
-            <Property name="name" type="java.lang.String" value="jTextField5" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="jTextFieldNingunaEstasPalabras" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+        <Component class="javax.swing.JRadioButton" name="jRadioButtonPDF">
           <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="jRadioButton1.text"/>
-            <Property name="name" type="java.lang.String" value="jRadioButton1" noResource="true"/>
+            <Property name="text" type="java.lang.String" resourceKey="jRadioButtonPDF.text"/>
+            <Property name="name" type="java.lang.String" value="jRadioButtonPDF" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
@@ -275,28 +275,28 @@
             <Property name="name" type="java.lang.String" value="jLabel5" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+        <Component class="javax.swing.JRadioButton" name="jRadioButtonTXT">
           <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="jRadioButton2.text"/>
-            <Property name="name" type="java.lang.String" value="jRadioButton2" noResource="true"/>
+            <Property name="text" type="java.lang.String" resourceKey="jRadioButtonTXT.text"/>
+            <Property name="name" type="java.lang.String" value="jRadioButtonTXT" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton3">
+        <Component class="javax.swing.JRadioButton" name="jRadioButtonDOC">
           <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="jRadioButton3.text"/>
-            <Property name="name" type="java.lang.String" value="jRadioButton3" noResource="true"/>
+            <Property name="text" type="java.lang.String" resourceKey="jRadioButtonDOC.text"/>
+            <Property name="name" type="java.lang.String" value="jRadioButtonDOC" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton4">
+        <Component class="javax.swing.JRadioButton" name="jRadioButtonHTML">
           <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="jRadioButton4.text"/>
-            <Property name="name" type="java.lang.String" value="jRadioButton4" noResource="true"/>
+            <Property name="text" type="java.lang.String" resourceKey="jRadioButtonHTML.text"/>
+            <Property name="name" type="java.lang.String" value="jRadioButtonHTML" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField1">
+        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldDesde">
           <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="jFormattedTextField1.text"/>
-            <Property name="name" type="java.lang.String" value="jFormattedTextField1" noResource="true"/>
+            <Property name="text" type="java.lang.String" resourceKey="jFormattedTextFieldDesde.text"/>
+            <Property name="name" type="java.lang.String" value="jFormattedTextFieldDesde" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
@@ -311,18 +311,21 @@
             <Property name="name" type="java.lang.String" value="jLabel7" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField2">
+        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldHasta">
           <Properties>
-            <Property name="name" type="java.lang.String" value="jFormattedTextField2" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="jFormattedTextFieldHasta" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="jButtonBusquedaAvanzada">
           <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="jButton3.text"/>
-            <Property name="name" type="java.lang.String" value="jButton3" noResource="true"/>
+            <Property name="text" type="java.lang.String" resourceKey="jButtonBusquedaAvanzada.text"/>
+            <Property name="name" type="java.lang.String" value="jButtonBusquedaAvanzada" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBusquedaAvanzadaActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="jComboBoxCampos">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="8">
@@ -336,7 +339,7 @@
                 <StringItem index="7" value=" "/>
               </StringArray>
             </Property>
-            <Property name="name" type="java.lang.String" value="jComboBox1" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="jComboBoxCampos" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
@@ -345,9 +348,9 @@
             <Property name="name" type="java.lang.String" value="jLabel8" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField6">
+        <Component class="javax.swing.JTextField" name="jTextFieldBusquedaPorCampo">
           <Properties>
-            <Property name="name" type="java.lang.String" value="jTextField6" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="jTextFieldBusquedaPorCampo" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
