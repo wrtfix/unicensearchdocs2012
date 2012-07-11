@@ -169,7 +169,7 @@ public class GenerarColeccionArchivos {
     public void parseColeccionGeneric(List listaDocumentos, AbstractParser parser){
          InputStream input;
 
-        try {
+               try {
             for (int i = 0; i < listaDocumentos.size(); i++) {
                 File file = (File) listaDocumentos.get(i);
                 input = new FileInputStream(file);
@@ -193,48 +193,55 @@ public class GenerarColeccionArchivos {
                 }
 
                 Document doc = new Document();
-
+                
                 if (textHandler.toString() != null && textHandler.toString().trim().compareTo(" ")!=0) {
                     doc.add(new Field("contenido",textHandler.toString().trim(), Field.Store.NO,Field.Index.ANALYZED));
-                    
+
                 } else {
                     doc.add(new Field("contenido", "No califica", Field.Store.YES, Field.Index.ANALYZED));
                 }
 
                 if (metadata.get(Metadata.CONTENT_TYPE) != null) {
-                    doc.add(new Field("extension", metadata.get(Metadata.CONTENT_TYPE), Field.Store.YES, Field.Index.NO));
+                    
+                    doc.add(new Field("extension", metadata.get(Metadata.CONTENT_TYPE), Field.Store.YES, Field.Index.ANALYZED));
                 } else {
                     doc.add(new Field("extension", "No califica", Field.Store.YES, Field.Index.NO));
                 }
                 if (metadata.get(Metadata.CREATION_DATE) != null && metadata.get(Metadata.CREATION_DATE).compareTo("") !=0) {
-                    doc.add(new Field("fecha", metadata.get(Metadata.CREATION_DATE), Field.Store.YES, Field.Index.NO));
+
+                        doc.add(new Field("fecha", utils.DatesUtils.parseCreationDate(metadata.get(Metadata.CREATION_DATE)), Field.Store.YES, Field.Index.ANALYZED));
                 } else {
-                    doc.add(new Field("fecha", "No califica", Field.Store.YES, Field.Index.NO));
+                        String fechaa=utils.DatesUtils.parseModificationDate(new Date());
+                        doc.add(new Field("fecha", fechaa, Field.Store.YES, Field.Index.ANALYZED));
                 }
                 if (file.getAbsolutePath() != null) {
-                    doc.add(new Field("path", file.getAbsolutePath(), Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
+                    
+                    doc.add(new Field("path", file.getAbsolutePath(), Field.Store.YES, Field.Index.ANALYZED));
                 } else {
-                    doc.add(new Field("path", "", Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
+                    doc.add(new Field("path", "", Field.Store.YES, Field.Index.ANALYZED));
                 }
                 if (metadata.get("title") != null && metadata.get("title").compareTo("")!=0) {
-                    doc.add(new Field("title", metadata.get("title"), Field.Store.YES, Field.Index.NO));
+                    
+                    doc.add(new Field("title", metadata.get("title"), Field.Store.YES, Field.Index.ANALYZED));
                 } else {
-                    doc.add(new Field("title", "No califica", Field.Store.YES, Field.Index.NO));
+                    doc.add(new Field("title", "No califica", Field.Store.YES, Field.Index.ANALYZED));
                 }
                 if (metadata.get("author") != null && metadata.get("author").compareTo("") != 0) {
-                    doc.add(new Field("author", metadata.get("author"), Field.Store.YES, Field.Index.NO));
+                    
+                    doc.add(new Field("author", metadata.get("author"), Field.Store.YES, Field.Index.ANALYZED));
                 } else {
-                    doc.add(new Field("author", "No califica", Field.Store.YES, Field.Index.NO));
+                    doc.add(new Field("author", "No califica", Field.Store.YES, Field.Index.ANALYZED));
                 }
                 Date date=new Date(file.lastModified());
                 if ( date!= null) {
-                    String fecha=date.toString();
-                    doc.add(new Field("fechaModificacion",fecha, Field.Store.YES, Field.Index.NO));
+                        String fecha=utils.DatesUtils.parseModificationDate(date);
+                        doc.add(new Field("fechaModificacion",fecha, Field.Store.YES, Field.Index.ANALYZED));
 
                 } else {
-                    doc.add(new Field("fechaModificacion", "", Field.Store.YES, Field.Index.NO));
+                        String fechaa=utils.DatesUtils.parseModificationDate(new Date());
+                        doc.add(new Field("fechaModificacion", fechaa, Field.Store.YES, Field.Index.ANALYZED));
                 }
-                
+
                 documents.add(doc);
             }
         } catch (FileNotFoundException ex) {
