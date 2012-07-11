@@ -117,10 +117,9 @@ public class DefaultIndex {
         public static Vector<Document> buscarIndice(TermQuery termino) throws CorruptIndexException, IOException, ParseException{
 
                 Query q = new QueryParser(Version.LUCENE_30, termino.getTerm().field(), analyzer).parse(termino.getTerm().text());
-		//Query q = termino;
-		//QueryParser q = new QueryParser("contenido",new SimpleAnalyser(analyzer));
 
-                int hitsPerPage = 10;
+
+                int hitsPerPage = 100;
 		IndexReader reader = IndexReader.open(dir);
 		IndexSearcher searcher = new IndexSearcher(reader);
 		TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, true);
@@ -143,6 +142,9 @@ public class DefaultIndex {
 		
 
 	}
+
+       
+
         /**
          * Permite abrir un indice
          * @param path
@@ -173,6 +175,7 @@ public class DefaultIndex {
 
         public void agregarDocument(Document elementos) throws CorruptIndexException, LockObtainFailedException, IOException{
             writer.addDocument(elementos);
+            writer.commit();
             writer.optimize();
         }
 
@@ -186,7 +189,7 @@ public class DefaultIndex {
             writer = new IndexWriter(dir, analyzer,true,IndexWriter.MaxFieldLength.UNLIMITED);
             
         }
-
+        
         public void cerrarWrite(){
         try {
             writer.close();
